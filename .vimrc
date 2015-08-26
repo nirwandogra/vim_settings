@@ -2,15 +2,18 @@ set nocompatible
 filetype off        
 filetype plugin on
 filetype plugin indent on 
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 set autoindent
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-
 set rtp+=~/.vim/bundle/Vundle.vim
 set foldmethod=indent
 set foldlevel=1
+set foldlevelstart =99
 setlocal foldmethod=syntax
-
+hi Normal ctermfg=252 ctermbg=none 
+set gcr=n:blinkon0
 call vundle#begin()
+
 Plugin 'gmarik/Vundle.vim'
 Plugin 'git://github.com/pangloss/vim-javascript'
 Plugin 'git://github.com/SirVer/ultisnips.git'
@@ -30,6 +33,11 @@ Plugin 'git://github.com/einars/js-beautify'
 Plugin 'git://github.com/Raimondi/delimitMate'
 Plugin 'git://github.com/airblade/vim-gitgutter'
 Plugin 'git://github.com/editorconfig/editorconfig-vim.git'
+Plugin 'git://github.com/kien/ctrlp.vim.git'
+Plugin 'git://github.com/tacahiroy/ctrlp-funky.git'
+Plugin 'git://github.com/crusoexia/vim-monokai'
+Plugin 'git://github.com/crusoexia/vim-javascript-lib'
+Plugin 'git://github.com/marijnh/tern_for_vim.git'
 call vundle#end()           
   
 highlight clear SignColumn
@@ -40,14 +48,16 @@ highlight GitGutterChangeDelete ctermfg=yellow
 
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:EditorConfig_indent_size = 2
+let g:ctrlp_extensions = ['funky'] 
 
-noremap <C-+> :ZoomIn
-noremap <C-i> :call JsBeautify()<CR>
-noremap <F1> :NERDTree<CR>
+nnoremap <C-LeftMouse> :TernDef<CR>
+nnoremap <C-f> :CtrlPFunky<CR>
+noremap <C-a> :call JsBeautify()<CR>
+noremap <F1> :NERDTreeToggle<CR>
 noremap <F5> :GundoToggle<CR>
 noremap <F6> :UltiSnipsEdit<CR>
 noremap <F7> :vsp ~/.vimrc<CR>
@@ -63,14 +73,14 @@ map <C-x> :tabclose<CR>
 set t_Co=256
 
 "color solarized
-"color Monokai
+color monokain
 "color badwolf
 "color xoria256
 "color zenburn
 "color stingray
 "color herald
 "color 256-grayvim
-
+let g:monokai_zentree = 1
 syntax enable
 set background=dark
 set incsearch
@@ -81,8 +91,8 @@ set cursorline
 set nocompatible " use indentation of previous line
 set autoindent " use intelligent indentation for C
 set smartindent " configure tabwidth and insert spaces instead of tabs
-set tabstop=4 " tab width is 4 spaces
-set shiftwidth=4 " indent also with 4 spaces
+set tabstop=2 " tab width is 4 spaces
+set shiftwidth=2 " indent also with 4 spaces
 set expandtab " expand tabs to spaces
 set number
 set backspace=indent,eol,start
