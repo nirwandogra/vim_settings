@@ -11,6 +11,7 @@ set foldlevel=1
 set foldlevelstart =99
 setlocal foldmethod=syntax
 hi Normal ctermfg=252 ctermbg=none 
+let g:loaded_matchparen=1
 set gcr=n:blinkon0
 call vundle#begin()
 
@@ -70,6 +71,8 @@ map  <C-l> :tabnext<CR>
 map  <C-h> :tabprevious<CR>
 map  <C-n> :tabnew<CR>
 map <C-x> :tabclose<CR>
+vnoremap <C-c> "*y"
+" delete current word, insert and normal
 set t_Co=256
 
 "color solarized
